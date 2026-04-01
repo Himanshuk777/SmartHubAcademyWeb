@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth overflow-x-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SmartHub Academy | Best Spoken English, Maths, Navodaya & Sainik School Coaching</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans:['Poppins', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            red: '#FF4B6A',    
+                            blue: '#3B82F6',   
+                            yellow: '#FFC107', 
+                            light: '#F8FAFC',  
+                            dark: '#1E293B',   
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 20px 40px -15px rgba(0,0,0,0.05)',
+                        'glow': '0 0 20px rgba(59, 130, 246, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html, body { overflow-x: hidden; width: 100%; max-width: 100vw; position: relative; }
+
+        /* Animations */
+        .blob { position: absolute; filter: blur(80px); z-index: -1; opacity: 0.5; animation: float 10s infinite alternate ease-in-out; max-width: 100vw; overflow: hidden; }
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(15px, -25px) scale(1.05); }
+            100% { transform: translate(-10px, 10px) scale(0.95); }
+        }
+        @keyframes float-smooth {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float-smooth { animation: float-smooth 4s ease-in-out infinite; }
+        .animate-float-delayed { animation: float-smooth 5s ease-in-out infinite 2s; }
+
+        .blob-1 { top: -5%; left: -5%; width: 300px; height: 300px; background: rgba(59, 130, 246, 0.3); }
+        .blob-2 { bottom: -5%; right: -5%; width: 350px; height: 350px; background: rgba(255, 75, 106, 0.2); animation-delay: -5s; }
+
+        /* Reveal Animations */
+        .reveal-up { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal-zoom { opacity: 0; transform: scale(0.95); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .is-visible { opacity: 1; transform: translate(0) scale(1); }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        .bg-pattern { background-image: radial-gradient(#3B82F6 1px, transparent 1px); background-size: 25px 25px; opacity: 0.05; }
+        .text-gradient { background: linear-gradient(to right, #3B82F6, #FF4B6A); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .typing-dot { animation: typing 1.4s infinite ease-in-out both; }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        /* Mobile Menu Smooth Transition */
+        #mobile-menu {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out;
+        }
+        #mobile-menu.open {
+            max-height: 400px;
+            opacity: 1;
+        }
+        
+        /* Menu icon rotation transition */
+        #mobile-menu-btn i { transition: transform 0.3s ease; }
+        #mobile-menu-btn.rotated i { transform: rotate(90deg); }
+    </style>
+</head>
+<body class="bg-brand-light text-brand-dark font-sans antialiased selection:bg-brand-blue selection:text-white">
+
+    <div class="blob blob-1 rounded-full"></div>
+    <div class="blob blob-2 rounded-full hidden md:block"></div>
+    <div class="absolute inset-0 bg-pattern pointer-events-none z-[-1]"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300 backdrop-blur-md bg-white/80 border-b border-gray-100" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 sm:h-20">
+                <!-- New Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer">
+                    <img src="https://i.ibb.co/gZxXFdQp/file-00000000c51c720bab2d843abeb523ef.png" alt="SmartHub Academy Logo" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover shadow-sm border border-gray-200">
+                    <span class="font-bold text-sm sm:text-base md:text-lg tracking-tight text-brand-dark">SmartHub <span class="text-brand-blue">Academy</span></span>
+                </div>
+
+                <div class="hidden lg:flex items-center space-x-5 xl:space-x-6">
+                    <a href="#home" class="text-gray-600 hover:text-brand-blue font-medium text-xs xl:text-sm transition-colors">Home</a>
+                    <a href="#courses" class="text-gray-600 hover:text-brand-blue font-medium text-xs xl:text-sm transition-colors">Courses</a>
+                    <a href="#gallery" class="text-gray-600 hover:text-brand-blue font-medium text-xs xl:text-sm transition-colors">Gallery</a>
+                    <a href="#testimonials" class="text-gray-600 hover:text-brand-blue font-medium text-xs xl:text-sm transition-colors">Reviews</a>
+                    <a href="#contact" class="px-5 py-2 rounded-full bg-gradient-to-r from-brand-red to-rose-400 text-white font-semibold text-xs sm:text-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
+                        Join New Batch
+                    </a>
+                </div>
+
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-brand-dark focus:outline-none p-2">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Smooth Animated Mobile Menu -->
+        <div id="mobile-menu" class="lg:hidden bg-white/95 backdrop-blur-xl border-t border-gray-100 absolute w-full shadow-2xl origin-top">
+            <div class="px-4 pt-2 pb-6 space-y-1">
+                <a href="#home" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:text-brand-blue hover:bg-blue-50 transition-colors">Home</a>
+                <a href="#courses" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:text-brand-blue hover:bg-blue-50 transition-colors">Courses</a>
+                <a href="#gallery" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:text-brand-blue hover:bg-blue-50 transition-colors">Gallery</a>
+                <a href="#testimonials" class="block px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:text-brand-blue hover:bg-blue-50 transition-colors">Reviews</a>
+                <a href="#contact" class="block mt-4 text-center w-full px-5 py-2.5 rounded-full bg-gradient-to-r from-brand-red to-rose-500 text-white text-sm font-bold shadow-md hover:shadow-lg transition-all">Join New Batch</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-24 pb-12 md:pt-32 md:pb-16 lg:pt-40 lg:pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center gap-10 lg:gap-8 overflow-hidden">
+        <div class="w-full lg:w-5/12 flex flex-col items-center lg:items-start text-center lg:text-left z-10">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 text-brand-blue font-semibold text-[10px] sm:text-xs mb-4 reveal-up border border-blue-100 shadow-sm">
+                <span class="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-blue opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 sm:h-2.5 sm:w-2.5 bg-brand-blue"></span>
+                </span>
+                New Batches Start for SHA
+            </div>
+            
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-5xl font-extrabold leading-tight mb-4 reveal-up delay-100">
+                Chhattisgarh's Most <br class="hidden sm:block">
+                <span class="text-gradient">Trusted Institute</span>
+            </h1>
+            
+            <p class="text-gray-600 text-xs sm:text-sm md:text-base mb-6 max-w-xl reveal-up delay-200 leading-relaxed">
+                Welcome to <span class="font-bold text-brand-dark">SmartHub Academy</span>. We are dedicated to providing the best coaching for Spoken English, Exclusive Maths, Competitive Exams, Jawahar Navodaya Vidyalaya, and Sainik School. Join Founder-Director Faneeram Khandekar to make your academic dreams a reality.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto reveal-up delay-300">
+                <a href="#contact" class="w-full sm:w-auto px-6 py-3 rounded-full bg-brand-blue text-white font-bold text-xs sm:text-sm hover:bg-blue-600 hover:shadow-glow transition-all duration-300 flex justify-center items-center gap-2">
+                    Enroll Now <i class="fas fa-arrow-right text-[10px]"></i>
+                </a>
+                <a href="courses.html" class="w-full sm:w-auto px-6 py-3 rounded-full bg-white text-brand-dark border border-gray-200 font-bold text-xs sm:text-sm hover:border-brand-blue hover:text-brand-blue hover:shadow-sm transition-all duration-300 flex justify-center items-center">
+                    Explore Courses
+                </a>
+            </div>
+        </div>
+
+        <div class="w-full lg:w-7/12 relative reveal-zoom mt-6 lg:mt-0 flex justify-center lg:justify-end">
+            <div class="relative w-full max-w-[22rem] sm:max-w-[26rem] md:max-w-[30rem] lg:max-w-[32rem] aspect-[4/4]">
+                <div class="absolute inset-0 rounded-full border-[1px] border-dashed border-brand-blue/30 animate-[spin_20s_linear_infinite]"></div>
+                <div class="absolute inset-4 rounded-full border-[1px] border-dashed border-brand-red/30 animate-[spin_15s_linear_infinite_reverse]"></div>
+                
+                <div class="absolute inset-5 sm:inset-6 md:inset-8 rounded-[2rem] sm:rounded-[2.5rem] bg-gray-100 overflow-hidden shadow-2xl flex items-center justify-center border-4 border-white group">
+                    <img src="https://i.ibb.co/0R8QGsjN/1775054872582.png" alt="Faneeram Khandekar" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-gray-900/95 via-gray-900/30 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 sm:p-6 text-center z-10">
+                        <h3 class="font-bold text-lg sm:text-xl md:text-2xl text-white tracking-wide drop-shadow-lg">Faneeram Khandekar</h3>
+                        <p class="text-brand-yellow font-bold mt-0.5 text-[9px] sm:text-[10px] md:text-xs uppercase tracking-widest drop-shadow-md">Founder & Director | Expert Educator</p>
+                    </div>
+                </div>
+
+                <div class="absolute top-2 right-2 sm:top-4 sm:right-4 bg-white/85 backdrop-blur-md px-3 sm:px-4 py-2 sm:py-3 rounded-2xl shadow-xl flex items-center gap-2 sm:gap-3 animate-float-smooth border border-white/60 z-20">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-brand-yellow to-amber-500 text-white flex items-center justify-center text-xs sm:text-sm shadow-inner"><i class="fas fa-trophy"></i></div>
+                    <div>
+                        <p class="text-[8px] sm:text-[9px] text-gray-600 font-bold uppercase tracking-wider mb-0.5">CG Rank 1</p>
+                        <p class="text-[10px] sm:text-xs font-extrabold text-brand-dark leading-none">Tushar Bishnoi</p>
+                    </div>
+                </div>
+
+                <div class="absolute -bottom-2 left-2 sm:-bottom-6 sm:left-6 bg-white/90 backdrop-blur-md px-3 sm:px-4 py-2 sm:py-3 rounded-2xl shadow-xl flex items-center gap-2 sm:gap-3 animate-float-delayed border border-white/60 z-20">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-brand-red to-rose-500 text-white flex items-center justify-center text-xs sm:text-sm shadow-inner"><i class="fas fa-chart-line"></i></div>
+                    <div>
+                        <p class="text-[8px] sm:text-[9px] text-gray-600 font-bold uppercase tracking-wider mb-0.5">in SHA 2024</p>
+                        <p class="text-[10px] sm:text-xs font-extrabold text-brand-dark leading-none">127 Selections</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="about" class="py-12 sm:py-16 bg-white relative border-t border-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10 reveal-up">
+                <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-dark mb-3">Our Legacy of <span class="text-brand-blue">Selections</span></h2>
+                <p class="text-gray-600 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed">Dedicated to serving the educational needs of our students. Consistently producing top ranks and selections year after year.</p>
+            </div>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6" id="counter-grid">
+                <!-- 2026 Box -->
+                <div class="bg-gradient-to-br from-blue-50 to-white border border-blue-100 p-5 rounded-2xl shadow-soft text-center reveal-up hover:-translate-y-1 transition-transform duration-300">
+                    <div class="w-10 h-10 mx-auto bg-blue-100 text-brand-blue rounded-xl flex items-center justify-center text-lg mb-3"><i class="fas fa-star"></i></div>
+                    <h3 class="text-2xl sm:text-3xl font-black text-brand-dark mb-1">Coming Soon</h3>
+                    <div class="h-1 w-8 bg-brand-blue mx-auto rounded mb-2"></div>
+                    <p class="text-xs sm:text-sm font-bold text-gray-700">Selections</p>
+                    <p class="text-[9px] sm:text-[10px] text-gray-500 font-medium bg-white inline-block px-2 py-0.5 rounded-full mt-1.5 border border-gray-100">SHA 2026</p>
+                </div>
+                <!-- 2025 Box -->
+                <div class="bg-gradient-to-br from-rose-50 to-white border border-rose-100 p-5 rounded-2xl shadow-soft text-center reveal-up delay-100 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="w-10 h-10 mx-auto bg-rose-100 text-brand-red rounded-xl flex items-center justify-center text-lg mb-3"><i class="fas fa-users"></i></div>
+                    <h3 class="text-3xl sm:text-4xl font-black text-brand-dark mb-1 counter" data-target="127">0</h3>
+                    <div class="h-1 w-8 bg-brand-red mx-auto rounded mb-2"></div>
+                    <p class="text-xs sm:text-sm font-bold text-gray-700">Selections</p>
+                    <p class="text-[9px] sm:text-[10px] text-gray-500 font-medium bg-white inline-block px-2 py-0.5 rounded-full mt-1.5 border border-gray-100">SHA 2024-25</p>
+                </div>
+                <!-- 2023 Box -->
+                <div class="bg-gradient-to-br from-emerald-50 to-white border border-emerald-100 p-5 rounded-2xl shadow-soft text-center reveal-up delay-200 hover:-translate-y-1 transition-transform duration-300">
+                    <div class="w-10 h-10 mx-auto bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center text-lg mb-3"><i class="fas fa-chart-line"></i></div>
+                    <h3 class="text-3xl sm:text-4xl font-black text-brand-dark mb-1 counter" data-target="54">0</h3>
+                    <div class="h-1 w-8 bg-emerald-500 mx-auto rounded mb-2"></div>
+                    <p class="text-xs sm:text-sm font-bold text-gray-700">Selections</p>
+                    <p class="text-[9px] sm:text-[10px] text-gray-500 font-medium bg-white inline-block px-2 py-0.5 rounded-full mt-1.5 border border-gray-100">SHA 2023</p>
+                </div>
+                <!-- 2022 Box -->
+                <div class="bg-gradient-to-br from-purple-50 to-white border border-purple-100 p-5 rounded-2xl shadow-soft text-center reveal-up delay-300 hover:-translate-y-1 transition-transform duration-300 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-brand-yellow text-brand-dark text-[8px] sm:text-[9px] font-bold px-2 py-0.5 rounded-bl-md z-10">Rank 1 included</div>
+                    <div class="w-10 h-10 mx-auto bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center text-lg mb-3 relative z-10"><i class="fas fa-medal"></i></div>
+                    <h3 class="text-3xl sm:text-4xl font-black text-brand-dark mb-1 counter relative z-10" data-target="29">0</h3>
+                    <div class="h-1 w-8 bg-purple-500 mx-auto rounded mb-2 relative z-10"></div>
+                    <p class="text-xs sm:text-sm font-bold text-gray-700 relative z-10">Selections</p>
+                    <p class="text-[9px] sm:text-[10px] text-gray-500 font-medium bg-white inline-block px-2 py-0.5 rounded-full mt-1.5 border border-gray-100 relative z-10">SHA 2022</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="py-12 sm:py-16 relative bg-gray-50/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10 reveal-up">
+                <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-dark mb-3">Our Popular <span class="text-brand-red">Courses</span></h2>
+                <p class="text-gray-600 text-xs sm:text-sm max-w-xl mx-auto">We rely on a solid grasp of basic principles that help students understand concepts easily and excel in their studies.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <!-- Spoken English -->
+                <div class="bg-white rounded-2xl p-6 shadow-soft border border-gray-100 reveal-up hover:-translate-y-1 transition-all duration-300 group">
+                    <div class="w-12 h-12 bg-blue-50 text-brand-blue rounded-xl flex items-center justify-center text-xl mb-4 group-hover:bg-brand-blue group-hover:text-white transition-colors"><i class="fas fa-language"></i></div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-2">Spoken English</h3>
+                    <p class="text-gray-500 text-xs sm:text-sm mb-4 leading-relaxed">Build your confidence and fluency in English with our interactive and engaging spoken English classes.</p>
+                    <a href="#contact" class="text-brand-blue text-xs sm:text-sm font-bold flex items-center gap-2 group-hover:gap-3 transition-all">Enroll Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- Exclusive Maths -->
+                <div class="bg-white rounded-2xl p-6 shadow-soft border border-gray-100 reveal-up delay-100 hover:-translate-y-1 transition-all duration-300 group">
+                    <div class="w-12 h-12 bg-rose-50 text-brand-red rounded-xl flex items-center justify-center text-xl mb-4 group-hover:bg-brand-red group-hover:text-white transition-colors"><i class="fas fa-calculator"></i></div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-2">Exclusive Maths Class</h3>
+                    <p class="text-gray-500 text-xs sm:text-sm mb-4 leading-relaxed">Master mathematical concepts from basic to advanced levels with expert tricks and solid foundational learning.</p>
+                    <a href="#contact" class="text-brand-red text-xs sm:text-sm font-bold flex items-center gap-2 group-hover:gap-3 transition-all">Enroll Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- Competitive Exams -->
+                <div class="bg-white rounded-2xl p-6 shadow-soft border border-gray-100 reveal-up delay-200 hover:-translate-y-1 transition-all duration-300 group">
+                    <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:bg-amber-500 group-hover:text-white transition-colors"><i class="fas fa-book-reader"></i></div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-2">Competitive Exams</h3>
+                    <p class="text-gray-500 text-xs sm:text-sm mb-4 leading-relaxed">Comprehensive preparation strategies designed to help you crack various state and national level competitive exams.</p>
+                    <a href="#contact" class="text-amber-600 text-xs sm:text-sm font-bold flex items-center gap-2 group-hover:gap-3 transition-all">Enroll Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- Navodaya -->
+                <div class="bg-white rounded-2xl p-6 shadow-soft border border-gray-100 reveal-up delay-300 hover:-translate-y-1 transition-all duration-300 group">
+                    <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:bg-emerald-500 group-hover:text-white transition-colors"><i class="fas fa-school"></i></div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-2">Jawahar Navodaya Vidyalaya</h3>
+                    <p class="text-gray-500 text-xs sm:text-sm mb-4 leading-relaxed">Targeted preparation for JNVST entrance exams with specialized study materials and mock tests.</p>
+                    <a href="#contact" class="text-emerald-600 text-xs sm:text-sm font-bold flex items-center gap-2 group-hover:gap-3 transition-all">Enroll Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- Sainik School -->
+                <div class="bg-white rounded-2xl p-6 shadow-soft border border-gray-100 reveal-up delay-[400ms] hover:-translate-y-1 transition-all duration-300 group">
+                    <div class="w-12 h-12 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center text-xl mb-4 group-hover:bg-purple-500 group-hover:text-white transition-colors"><i class="fas fa-shield-alt"></i></div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-2">Sainik School</h3>
+                    <p class="text-gray-500 text-xs sm:text-sm mb-4 leading-relaxed">Rigorous academic training to ensure successful admission into prestigious Sainik Schools across India.</p>
+                    <a href="#contact" class="text-purple-600 text-xs sm:text-sm font-bold flex items-center gap-2 group-hover:gap-3 transition-all">Enroll Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-[2rem] p-6 sm:p-10 shadow-xl border border-gray-100 reveal-up">
+                <h3 class="text-lg sm:text-xl font-bold text-center text-brand-dark mb-8">Why Choose SmartHub Academy?</h3>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 text-center">
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="w-10 h-10 bg-blue-50 text-brand-blue rounded-full flex items-center justify-center text-sm"><i class="fas fa-laptop"></i></div>
+                        <p class="text-[10px] sm:text-xs font-semibold text-gray-700">Online & Offline<br>Classes</p>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="w-10 h-10 bg-rose-50 text-brand-red rounded-full flex items-center justify-center text-sm"><i class="fas fa-globe-asia"></i></div>
+                        <p class="text-[10px] sm:text-xs font-semibold text-gray-700">English & Hindi<br>Medium</p>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="w-10 h-10 bg-amber-50 text-amber-600 rounded-full flex items-center justify-center text-sm"><i class="fas fa-file-alt"></i></div>
+                        <p class="text-[10px] sm:text-xs font-semibold text-gray-700">Topic Wise<br>Test Papers</p>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center text-sm"><i class="fas fa-headset"></i></div>
+                        <p class="text-[10px] sm:text-xs font-semibold text-gray-700">24/7 Online<br>Support</p>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="w-10 h-10 bg-purple-50 text-purple-600 rounded-full flex items-center justify-center text-sm"><i class="fas fa-book"></i></div>
+                        <p class="text-[10px] sm:text-xs font-semibold text-gray-700">Competitive Books<br>Available</p>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="w-10 h-10 bg-cyan-50 text-cyan-600 rounded-full flex items-center justify-center text-sm"><i class="fas fa-chart-line"></i></div>
+                        <p class="text-[10px] sm:text-xs font-semibold text-gray-700">Result Oriented<br>Institute</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Horizontal Scrolling Gallery Section with Lightbox -->
+    <section id="gallery" class="py-12 sm:py-16 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8 reveal-up">
+                <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-dark mb-3">Our <span class="text-brand-blue">Gallery</span></h2>
+                <p class="text-gray-600 text-xs sm:text-sm max-w-xl mx-auto">Glimpses of our interactive classes, successful moments, and our bright students.</p>
+            </div>
+
+            <!-- Horizontal Scrolling Track -->
+            <div class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-6 pt-2 no-scrollbar scroll-smooth w-full reveal-up delay-100 items-center" style="scroll-padding-left: 1rem;">
+                
+                <div class="gallery-item snap-center shrink-0 w-[75vw] sm:w-[300px] lg:w-[350px] overflow-hidden rounded-xl shadow-sm group relative cursor-zoom-in bg-gray-50 flex items-center justify-center">
+                    <img src="https://i.ibb.co/gLy8TCJs/aifaceswap-7c91a64beb84dbe547d22970977ab663.jpg" loading="lazy" class="w-full h-auto max-h-[400px] object-contain group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex justify-center items-center"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                </div>
+                <div class="gallery-item snap-center shrink-0 w-[75vw] sm:w-[300px] lg:w-[350px] overflow-hidden rounded-xl shadow-sm group relative cursor-zoom-in bg-gray-50 flex items-center justify-center">
+                    <img src="https://i.ibb.co/N2gpwL6N/aifaceswap-cd8fa324a6826262f0a187cc6e1792f4.jpg" loading="lazy" class="w-full h-auto max-h-[400px] object-contain group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex justify-center items-center"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                </div>
+                <div class="gallery-item snap-center shrink-0 w-[75vw] sm:w-[300px] lg:w-[350px] overflow-hidden rounded-xl shadow-sm group relative cursor-zoom-in bg-gray-50 flex items-center justify-center">
+                    <img src="https://i.ibb.co/Cpf1RtLh/aifaceswap-9c9514137a3005efa4c84d5065343383.jpg" loading="lazy" class="w-full h-auto max-h-[400px] object-contain group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex justify-center items-center"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                </div>
+                <div class="gallery-item snap-center shrink-0 w-[75vw] sm:w-[300px] lg:w-[350px] overflow-hidden rounded-xl shadow-sm group relative cursor-zoom-in bg-gray-50 flex items-center justify-center">
+                    <img src="https://i.ibb.co/FbCMtN4w/aifaceswap-069b06b239ba8db5879c2d0b73aa7a14.jpg" loading="lazy" class="w-full h-auto max-h-[400px] object-contain group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex justify-center items-center"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                </div>
+                <div class="gallery-item snap-center shrink-0 w-[75vw] sm:w-[300px] lg:w-[350px] overflow-hidden rounded-xl shadow-sm group relative cursor-zoom-in bg-gray-50 flex items-center justify-center">
+                    <img src="https://i.ibb.co/W4JNzzwS/aifaceswap-e7a77eaa9e0b390812e6f6a7a31117e9.jpg" loading="lazy" class="w-full h-auto max-h-[400px] object-contain group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex justify-center items-center"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                </div>
+                <div class="gallery-item snap-center shrink-0 w-[75vw] sm:w-[300px] lg:w-[350px] overflow-hidden rounded-xl shadow-sm group relative cursor-zoom-in bg-gray-50 flex items-center justify-center">
+                    <img src="https://i.ibb.co/jFBxfhc/aifaceswap-78382fe74d5d9c0bbaf8d100a9af4292.jpg" loading="lazy" class="w-full h-auto max-h-[400px] object-contain group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex justify-center items-center"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                </div>
+
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="flex justify-center mt-2 text-gray-500 text-xs animate-pulse">
+                <i class="fas fa-arrows-alt-h mr-2"></i> Swipe left or right to explore
+            </div>
+        </div>
+    </section>
+
+    <!-- Fullscreen Lightbox Overlay -->
+    <div id="lightbox" class="fixed inset-0 z-[110] bg-black/95 hidden flex justify-center items-center backdrop-blur-sm transition-opacity opacity-0 duration-300">
+        <button id="lightbox-close" class="absolute top-6 right-6 w-12 h-12 flex justify-center items-center bg-white/10 rounded-full text-white text-xl hover:bg-brand-red transition-colors z-50">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="relative w-[90vw] h-[90vh] flex justify-center items-center overflow-hidden">
+            <img id="lightbox-img" src="" class="max-w-full max-h-full object-contain transition-transform duration-300 cursor-zoom-in transform scale-100 drop-shadow-2xl rounded-lg">
+        </div>
+        <div class="absolute bottom-6 text-white text-xs bg-black/60 px-4 py-2 rounded-full pointer-events-none">Click to Zoom in/out • Use Scroll to zoom further</div>
+    </div>
+
+    <!-- Syllabus & Previous Papers Section -->
+    <section id="papers" class="py-12 bg-blue-50/50 border-t border-b border-blue-100 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal-up">
+            <div class="inline-flex w-16 h-16 bg-white shadow-md rounded-full items-center justify-center text-brand-blue text-2xl mb-4">
+                <i class="fas fa-file-pdf"></i>
+            </div>
+            <h2 class="text-2xl md:text-3xl font-bold text-brand-dark mb-3">Syllabus & <span class="text-brand-blue">Important Links</span></h2>
+            <p class="text-gray-600 text-xs sm:text-sm max-w-xl mx-auto mb-6">Access official previous year question papers, mock tests, and check the latest competitive exam updates.</p>
+            
+            <div class="flex flex-wrap justify-center gap-4 mt-6">
+                <a href="#contact" class="px-8 py-3 bg-white border border-brand-blue text-brand-blue font-bold rounded-full hover:bg-brand-blue hover:text-white transition-all text-sm shadow-md flex items-center group transform hover:-translate-y-1">
+                    <i class="fas fa-external-link-alt mr-2 group-hover:animate-bounce"></i> SHA Mock Tests
+                </a>
+                <a href="#contact" class="px-8 py-3 bg-white border border-brand-red text-brand-red font-bold rounded-full hover:bg-brand-red hover:text-white transition-all text-sm shadow-md flex items-center group transform hover:-translate-y-1">
+                    <i class="fas fa-briefcase mr-2 group-hover:animate-bounce"></i> Latest Admissions
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Student Testimonials -->
+    <section id="testimonials" class="py-12 sm:py-16 bg-brand-dark relative text-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10 reveal-up">
+                <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-3">What Students <span class="text-brand-blue">Saying</span></h2>
+                <p class="text-gray-400 text-xs sm:text-sm max-w-xl mx-auto">Hear from our successful aspirants who trusted SmartHub Academy.</p>
+            </div>
+            <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 pt-2 no-scrollbar scroll-smooth w-full reveal-up delay-100" id="reviews-track" style="scroll-padding-left: 1rem;">
+                <div class="review-item snap-center shrink-0 w-[85vw] md:w-[400px] bg-gray-800 p-6 rounded-2xl border border-gray-700 hover:border-brand-blue transition-colors">
+                    <div class="flex text-brand-yellow text-xs mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-gray-300 text-[11px] sm:text-xs leading-relaxed italic mb-4">"SmartHub Academy is one of the best institutions for competitive exams. Respected Faneeram Khandekar sir is very helpful and a great mentor. The Maths classes are very comprehensive and easy to understand."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 bg-brand-blue rounded-full flex items-center justify-center text-white font-bold text-xs">A</div>
+                        <div><p class="text-sm font-bold">Amit Verma</p><p class="text-[9px] text-gray-400">Competitive Exams Aspirant</p></div>
+                    </div>
+                </div>
+                <div class="review-item snap-center shrink-0 w-[85vw] md:w-[400px] bg-gray-800 p-6 rounded-2xl border border-gray-700 hover:border-brand-red transition-colors">
+                    <div class="flex text-brand-yellow text-xs mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-gray-300 text-[11px] sm:text-xs leading-relaxed italic mb-4">"The Spoken English course completely transformed my confidence. Faneeram sir's teaching methodology is practical and highly engaging. I definitely recommend this Academy."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center text-white font-bold text-xs">P</div>
+                        <div><p class="text-sm font-bold">Priya Sahu</p><p class="text-[9px] text-gray-400">Spoken English Student</p></div>
+                    </div>
+                </div>
+                <div class="review-item snap-center shrink-0 w-[85vw] md:w-[400px] bg-gray-800 p-6 rounded-2xl border border-gray-700 hover:border-amber-500 transition-colors">
+                    <div class="flex text-brand-yellow text-xs mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-gray-300 text-[11px] sm:text-xs leading-relaxed italic mb-4">"My child was preparing for Jawahar Navodaya Vidyalaya, and SmartHub Academy's test series and guidance were exactly what we needed. Now he is selected!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 bg-amber-500 rounded-full flex items-center justify-center text-white font-bold text-xs">R</div>
+                        <div><p class="text-sm font-bold">Ramesh Kumar</p><p class="text-[9px] text-gray-400">Parent of JNV Student</p></div>
+                    </div>
+                </div>
+                <div class="review-item snap-center shrink-0 w-[85vw] md:w-[400px] bg-gray-800 p-6 rounded-2xl border border-gray-700 hover:border-emerald-500 transition-colors">
+                    <div class="flex text-brand-yellow text-xs mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-gray-300 text-[11px] sm:text-xs leading-relaxed italic mb-4">"I took the Exclusive Maths batch. Faneeram Khandekar sir's short tricks and concept clarity are incredible. He simplifies complex chapters effortlessly."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center text-white font-bold text-xs">S</div>
+                        <div><p class="text-sm font-bold">Suresh Patel</p><p class="text-[9px] text-gray-400">Maths Student</p></div>
+                    </div>
+                </div>
+                <div class="review-item snap-center shrink-0 w-[85vw] md:w-[400px] bg-gray-800 p-6 rounded-2xl border border-gray-700 hover:border-purple-500 transition-colors">
+                    <div class="flex text-brand-yellow text-xs mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-gray-300 text-[11px] sm:text-xs leading-relaxed italic mb-4">"The 24/7 support via WhatsApp group really helps. Sir is always available to clear our doubts. Best institute for Sainik School entrance preparation!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold text-xs">K</div>
+                        <div><p class="text-sm font-bold">Kavita Sharma</p><p class="text-[9px] text-gray-400">Sainik School Aspirant</p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-center mt-4 text-gray-500 text-xs md:hidden animate-pulse">
+                <i class="fas fa-arrows-alt-h mr-2"></i> Swipe continuously
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action / Contact -->
+    <section id="contact" class="py-12 sm:py-16 relative overflow-hidden bg-gray-50">
+        <div class="absolute inset-0 bg-brand-blue transform -skew-y-2 origin-top-left z-0 scale-110 opacity-10"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-dark mb-3 reveal-up">Ready to Start Your Journey?</h2>
+            <p class="text-gray-600 text-xs sm:text-sm mb-6 sm:mb-8 reveal-up delay-100 max-w-xl mx-auto">Enrollments are open for the new batch. Contact us today to secure your seat and take the first step towards a bright future.</p>
+            <div class="bg-white p-6 sm:p-8 md:p-10 rounded-[2.5rem] md:rounded-[3rem] shadow-2xl reveal-up delay-200 border border-gray-100">
+                <div class="inline-block px-3 py-1.5 bg-rose-100 text-brand-red font-bold rounded-md mb-4 text-[10px] uppercase tracking-widest">
+                    Official Contact Details
+                </div>
+                <div class="flex flex-col gap-2 mb-6 text-center text-gray-600 text-[11px] sm:text-xs">
+                    <p><i class="fas fa-map-marker-alt text-brand-red mr-1"></i> India, Chhattisgarh, Bhuigaon (495554)</p>
+                    <p><i class="fas fa-envelope text-brand-blue mr-1"></i> smarthubacademy@gmail.com</p>
+                </div>
+                <div class="flex flex-col md:flex-row justify-center items-stretch gap-3 sm:gap-4 w-full max-w-2xl mx-auto mb-8">
+                    <a href="tel:+916264936098" class="flex-1 bg-gray-50 hover:bg-white border border-gray-100 hover:border-brand-blue p-4 rounded-2xl flex items-center gap-3 group transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5">
+                        <div class="w-12 h-12 bg-blue-100 group-hover:bg-brand-blue group-hover:text-white text-brand-blue rounded-full flex items-center justify-center text-xl transition-colors duration-300 flex-shrink-0"><i class="fas fa-headset"></i></div>
+                        <div class="text-left">
+                            <p class="text-[9px] text-gray-500 font-bold uppercase tracking-wider mb-0.5">Call Us</p>
+                            <p class="text-sm sm:text-base md:text-lg font-black text-brand-dark group-hover:text-brand-blue transition-colors">+91 6264936098</p>
+                        </div>
+                    </a>
+                    <a href="https://wa.me/916264936098" target="_blank" class="flex-1 bg-gray-50 hover:bg-white border border-gray-100 hover:border-emerald-500 p-4 rounded-2xl flex items-center gap-3 group transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5">
+                        <div class="w-12 h-12 bg-emerald-100 group-hover:bg-emerald-500 group-hover:text-white text-emerald-600 rounded-full flex items-center justify-center text-xl transition-colors duration-300 flex-shrink-0"><i class="fab fa-whatsapp"></i></div>
+                        <div class="text-left">
+                            <p class="text-[9px] text-gray-500 font-bold uppercase tracking-wider mb-0.5">WhatsApp Us</p>
+                            <p class="text-sm sm:text-base md:text-lg font-black text-brand-dark group-hover:text-emerald-600 transition-colors">+91 6264936098</p>
+                        </div>
+                    </a>
+                </div>
+                <div>
+                    <button class="w-full sm:w-auto px-10 py-3.5 bg-gradient-to-r from-brand-blue to-blue-500 text-white font-bold text-xs sm:text-sm rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                        Request a Call Back
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-10 sm:py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 text-center md:text-left">
+                <div class="flex flex-col items-center md:items-start gap-3">
+                    <div class="flex items-center gap-2">
+                        <img src="https://i.ibb.co/gZxXFdQp/file-00000000c51c720bab2d843abeb523ef.png" alt="SmartHub Academy Logo" class="w-8 h-8 rounded-full object-cover shadow-sm border border-gray-700">
+                        <span class="font-bold text-base sm:text-lg text-white tracking-tight">SmartHub <span class="text-brand-blue">Academy</span></span>
+                    </div>
+                    <p class="text-[10px] sm:text-xs text-gray-500 max-w-xs leading-relaxed">
+                        Chhattisgarh's most renowned & trusted institute for Spoken English, Maths, Competitive Exams, JNV, and Sainik School coaching.
+                    </p>
+                </div>
+                
+                <div class="flex flex-col items-center md:items-start gap-2">
+                    <h4 class="text-white font-bold text-sm mb-2">Our Links</h4>
+                    <a href="#courses" class="text-[11px] sm:text-xs text-gray-400 hover:text-brand-blue transition-colors">Course List</a>
+                    <a href="#gallery" class="text-[11px] sm:text-xs text-gray-400 hover:text-brand-blue transition-colors">Gallery</a>
+                    <a href="#papers" class="text-[11px] sm:text-xs text-gray-400 hover:text-brand-blue transition-colors">Syllabus & Links</a>
+                </div>
+
+                <div class="flex flex-col items-center md:items-start gap-2">
+                    <h4 class="text-white font-bold text-sm mb-2">Contact Details</h4>
+                    <p class="text-[10px] sm:text-xs text-gray-400"><i class="fas fa-map-marker-alt mr-2"></i>India, Chhattisgarh, Bhuigaon (495554)</p>
+                    <a href="mailto:smarthubacademy@gmail.com" class="text-[10px] sm:text-xs text-gray-400 hover:text-brand-blue"><i class="fas fa-envelope mr-2"></i>smarthubacademy@gmail.com</a>
+                    
+                    <div class="flex space-x-2 mt-3 flex-wrap justify-center md:justify-start">
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-red-600 hover:text-white transition-colors text-xs shadow-sm"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-colors text-xs shadow-sm"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-pink-600 hover:text-white transition-colors text-xs shadow-sm"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-400 hover:text-white transition-colors text-xs shadow-sm"><i class="fab fa-telegram-plane"></i></a>
+                        <a href="https://wa.me/916264936098" target="_blank" class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-green-500 hover:text-white transition-colors text-xs shadow-sm"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-6 text-center flex flex-col sm:flex-row justify-between items-center">
+                <p class="text-[10px] sm:text-xs text-gray-500 mb-2 sm:mb-0">&copy; <span id="year"></span> All Rights Reserved SmartHub Academy</p>
+                <p class="text-[10px] sm:text-xs text-gray-600">Empowering students for a brighter future.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Chatbot Button -->
+    <button id="chatbot-toggle" class="fixed bottom-6 right-6 w-14 h-14 bg-gradient-to-r from-brand-blue to-blue-500 text-white rounded-full shadow-2xl flex items-center justify-center text-2xl z-[90] hover:scale-110 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all duration-300">
+        <i class="fas fa-comment-dots"></i>
+    </button>
+
+    <!-- Chatbot Full Screen Window -->
+    <div id="chatbot-window" class="fixed inset-0 z-[100] w-full h-full bg-white flex flex-col transition-all duration-300 transform scale-0 opacity-0 hidden origin-bottom-right">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-brand-blue to-blue-600 p-4 sm:p-5 text-white flex justify-between items-center shadow-md shrink-0">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-white text-brand-blue rounded-full flex items-center justify-center text-lg shadow-sm"><i class="fas fa-robot"></i></div>
+                <div>
+                    <span class="font-bold text-base block leading-tight">SmartHub AI Assistant</span>
+                    <span class="text-[11px] text-blue-200 block mt-0.5"><span class="inline-block w-2 h-2 bg-green-400 rounded-full mr-1"></span>Always Online to help</span>
+                </div>
+            </div>
+            <button id="chatbot-close" class="text-white hover:text-blue-200 transition-colors bg-white/10 w-10 h-10 rounded-full flex items-center justify-center"><i class="fas fa-times text-xl"></i></button>
+        </div>
+        
+        <!-- Messages Area -->
+        <div id="chatbot-messages" class="flex-1 overflow-y-auto p-4 sm:p-6 flex flex-col gap-4 bg-gray-50 text-sm scroll-smooth">
+            <div class="text-xs text-center text-gray-400 my-2 bg-gray-200/50 inline-block px-3 py-1 rounded-full mx-auto">Today</div>
+            <div class="self-start bg-white border border-gray-100 p-4 rounded-2xl rounded-tl-sm shadow-sm max-w-[85%] text-gray-700 leading-relaxed">
+                Hello! 👋 I am the AI Assistant for SmartHub Academy. I can help you with detailed course info, fees, location, and more. <b>Please choose an option below or type your question.</b>
+            </div>
+        </div>
+
+        <!-- Dynamic Quick Action Chips Container -->
+        <div id="chatbot-chips-container" class="bg-gray-100 border-t border-gray-200 p-3 overflow-x-auto flex gap-2 no-scrollbar whitespace-nowrap shrink-0">
+            <!-- Chips injected via JS -->
+        </div>
+
+        <!-- Input Box -->
+        <div class="p-4 bg-white border-t border-gray-100 flex gap-3 items-center shrink-0">
+            <input type="text" id="chatbot-input" class="flex-1 bg-gray-50 border border-gray-200 rounded-full px-5 py-3 text-sm outline-none focus:border-brand-blue focus:bg-white transition-all shadow-inner" placeholder="Type your message here...">
+            <button id="chatbot-send" class="w-12 h-12 bg-brand-blue text-white rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors shadow-md flex-shrink-0 text-lg">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            /* =======================================================
+               SMOOTH MOBILE MENU ANIMATION LOGIC
+               ======================================================= */
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('open');
+                btn.classList.toggle('rotated');
+                const icon = btn.querySelector('i');
+                if (menu.classList.contains('open')) {
+                    icon.classList.replace('fa-bars', 'fa-times');
+                } else {
+                    icon.classList.replace('fa-times', 'fa-bars');
+                }
+            });
+
+            menu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.remove('open');
+                    btn.classList.remove('rotated');
+                    const icon = btn.querySelector('i');
+                    icon.classList.replace('fa-times', 'fa-bars');
+                });
+            });
+
+            /* =======================================================
+               STICKY NAVBAR & INTERSECTION OBSERVER
+               ======================================================= */
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.add('shadow-md');
+                    navbar.classList.replace('bg-white/80', 'bg-white/95');
+                } else {
+                    navbar.classList.remove('shadow-md');
+                    navbar.classList.replace('bg-white/95', 'bg-white/80');
+                }
+            });
+
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        if(entry.target.id === 'counter-grid') startCounters();
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            }, observerOptions);
+
+            const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-zoom');
+            revealElements.forEach(el => observer.observe(el));
+            
+            const counterGrid = document.getElementById('counter-grid');
+            if(counterGrid) observer.observe(counterGrid);
+
+            let countersStarted = false;
+            function startCounters() {
+                if (countersStarted) return;
+                countersStarted = true;
+                const counters = document.querySelectorAll('.counter');
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+                    let count = 0;
+                    const inc = target / 200;
+                    const updateCount = () => {
+                        count += inc;
+                        if (count < target) {
+                            counter.innerText = Math.ceil(count);
+                            requestAnimationFrame(updateCount);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+                    updateCount();
+                });
+            }
+
+            /* =======================================================
+               ENHANCED GALLERY LIGHTBOX LOGIC
+               ======================================================= */
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxClose = document.getElementById('lightbox-close');
+            let currentScale = 1;
+
+            document.querySelectorAll('.gallery-item img').forEach(img => {
+                img.addEventListener('click', (e) => {
+                    lightboxImg.src = e.target.src;
+                    lightbox.classList.remove('hidden');
+                    setTimeout(() => lightbox.classList.remove('opacity-0'), 10);
+                    currentScale = 1;
+                    lightboxImg.style.transform = `scale(${currentScale})`;
+                    lightboxImg.style.cursor = 'zoom-in';
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            function closeLightbox() {
+                lightbox.classList.add('opacity-0');
+                setTimeout(() => lightbox.classList.add('hidden'), 300);
+                document.body.style.overflow = '';
+            }
+
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', (e) => {
+                if(e.target === lightbox) closeLightbox();
+            });
+
+            lightboxImg.addEventListener('click', () => {
+                currentScale = currentScale === 1 ? 2 : 1;
+                lightboxImg.style.transform = `scale(${currentScale})`;
+                lightboxImg.style.cursor = currentScale === 1 ? 'zoom-in' : 'zoom-out';
+            });
+
+            /* =======================================================
+               INFINITE REVIEWS SWIPING LOGIC
+               ======================================================= */
+            const track = document.getElementById('reviews-track');
+            if (track) {
+                const originalItems = Array.from(track.querySelectorAll('.review-item'));
+                originalItems.forEach(item => track.appendChild(item.cloneNode(true)));
+                originalItems.forEach(item => track.appendChild(item.cloneNode(true)));
+
+                track.addEventListener('scroll', () => {
+                    const scrollLeft = track.scrollLeft;
+                    const scrollWidth = track.scrollWidth;
+                    const clientWidth = track.clientWidth;
+
+                    if (scrollLeft + clientWidth >= scrollWidth - 10) {
+                        track.style.scrollBehavior = 'auto'; 
+                        track.scrollLeft = scrollWidth / 3; 
+                        track.style.scrollBehavior = 'smooth'; 
+                    } else if (scrollLeft <= 0) {
+                        track.style.scrollBehavior = 'auto';
+                        track.scrollLeft = scrollWidth / 3;
+                        track.style.scrollBehavior = 'smooth';
+                    }
+                });
+            }
+
+            /* =======================================================
+               ADVANCED CHATBOT DECISION TREE
+               ======================================================= */
+            const chatMenu = {
+                main: {
+                    message: "Here are some topics I can help you with:",
+                    options:[
+                        { label: "📚 Courses Info", target: "courses" },
+                        { label: "💰 Fee Structure", target: "fees" },
+                        { label: "📍 Location & Contact", target: "contact" },
+                        { label: "⏱ Timings & Batches", target: "timings" }
+                    ]
+                },
+                courses: {
+                    message: "Which course would you like to know about?",
+                    options:[
+                        { label: "Spoken English", reply: "<b>Spoken English</b> classes are designed to build your fluency, confidence, and public speaking skills. Faneeram sir leads highly interactive sessions." },
+                        { label: "Exclusive Maths", reply: "Our <b>Maths batch</b> focuses on strong conceptual clarity with expert tricks. Suitable from basic to advanced levels." },
+                        { label: "Navodaya & Sainik", reply: "We provide targeted <b>JNV and Sainik School</b> entrance exam preparation. It includes rigorous practice, regular tests, and expert guidance." },
+                        { label: "Competitive Exams", reply: "We prepare students for various <b>Competitive Exams</b> with comprehensive strategies, mock tests, and updated syllabus coverage." },
+                        { label: "⬅️ Back", target: "main" }
+                    ]
+                },
+                fees: {
+                    message: "What kind of fee structure are you looking for?",
+                    options:[
+                        { label: "Courses Fee Structure", reply: "The fee varies depending on whether you opt for Spoken English, Maths, or Competitive Exams. Please message us on WhatsApp for the exact brochure." },
+                        { label: "⬅️ Back", target: "main" }
+                    ]
+                },
+                contact: {
+                    message: "Here is how you can reach us:",
+                    options:[
+                        { label: "Get Address", reply: "We are located at: <br><b>India, Chhattisgarh, Bhuigaon (495554)</b>. <br>We provide an excellent and peaceful learning environment." },
+                        { label: "Call / WhatsApp", reply: "You can Call us or drop a WhatsApp message anytime at <b>+91 6264936098</b>." },
+                        { label: "⬅️ Back", target: "main" }
+                    ]
+                },
+                timings: {
+                    message: "We generally operate in different shifts for student convenience. Which one do you prefer?",
+                    options:[
+                        { label: "Morning Batch", reply: "Our Morning Batches usually start around 8:00 AM. They are great for students who prefer studying early." },
+                        { label: "Evening Batch", reply: "Our Evening Batches start around 4:00 PM. Perfect for regular school going students." },
+                        { label: "⬅️ Back", target: "main" }
+                    ]
+                }
+            };
+
+            const chatToggleBtn = document.getElementById('chatbot-toggle');
+            const chatWindow = document.getElementById('chatbot-window');
+            const chatCloseBtn = document.getElementById('chatbot-close');
+            const chatInput = document.getElementById('chatbot-input');
+            const chatSendBtn = document.getElementById('chatbot-send');
+            const chatMessages = document.getElementById('chatbot-messages');
+            const chatChipsContainer = document.getElementById('chatbot-chips-container');
+
+            let currentMenuId = 'main';
+
+            function renderChatChips(menuId) {
+                chatChipsContainer.innerHTML = '';
+                const menu = chatMenu[menuId];
+                
+                menu.options.forEach(opt => {
+                    const btn = document.createElement('button');
+                    btn.className = 'chat-chip px-4 py-2 bg-white border border-brand-blue text-brand-blue font-medium text-xs rounded-full hover:bg-brand-blue hover:text-white transition-colors shadow-sm whitespace-nowrap';
+                    btn.innerHTML = opt.label;
+                    btn.onclick = () => {
+                        appendMessage(opt.label, true);
+                        showTyping();
+                        
+                        setTimeout(() => {
+                            removeTyping();
+                            if (opt.reply) {
+                                appendMessage(opt.reply, false);
+                                setTimeout(() => {
+                                   appendMessage("If you need more detailed assistance, please connect directly with our experts on WhatsApp at <b>+91 6264936098</b>. <br><br><a href='https://wa.me/916264936098' target='_blank' class='inline-block mt-2 px-4 py-2 bg-emerald-500 text-white rounded-full font-bold shadow-md hover:bg-emerald-600 transition-colors text-xs'><i class='fab fa-whatsapp mr-1'></i>Chat on WhatsApp</a>", false);
+                                }, 1500);
+                            }
+                            if (opt.target) {
+                                currentMenuId = opt.target;
+                                renderChatChips(opt.target);
+                                appendMessage(chatMenu[opt.target].message, false);
+                            }
+                        }, 800 + Math.random() * 500); 
+                    };
+                    chatChipsContainer.appendChild(btn);
+                });
+            }
+
+            renderChatChips(currentMenuId);
+
+            chatToggleBtn.addEventListener('click', () => {
+                chatWindow.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                setTimeout(() => {
+                    chatWindow.classList.remove('scale-0', 'opacity-0');
+                    chatWindow.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            });
+
+            chatCloseBtn.addEventListener('click', () => {
+                chatWindow.classList.remove('scale-100', 'opacity-100');
+                chatWindow.classList.add('scale-0', 'opacity-0');
+                document.body.style.overflow = '';
+                setTimeout(() => chatWindow.classList.add('hidden'), 300);
+            });
+
+            function appendMessage(text, isUser) {
+                const msgDiv = document.createElement('div');
+                msgDiv.className = `p-4 rounded-2xl shadow-sm max-w-[85%] text-sm leading-relaxed ${isUser ? 'self-end bg-brand-blue text-white rounded-tr-sm' : 'self-start bg-white border border-gray-100 text-gray-700 rounded-tl-sm'}`;
+                msgDiv.innerHTML = text; 
+                chatMessages.appendChild(msgDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            function showTyping() {
+                const typingDiv = document.createElement('div');
+                typingDiv.id = 'typing-indicator';
+                typingDiv.className = 'self-start bg-white border border-gray-100 py-3 px-5 rounded-2xl rounded-tl-sm shadow-sm max-w-[85%] flex gap-1 items-center h-12';
+                typingDiv.innerHTML = `
+                    <div class="w-2 h-2 bg-gray-400 rounded-full typing-dot"></div>
+                    <div class="w-2 h-2 bg-gray-400 rounded-full typing-dot"></div>
+                    <div class="w-2 h-2 bg-gray-400 rounded-full typing-dot"></div>
+                `;
+                chatMessages.appendChild(typingDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            function removeTyping() {
+                const typingDiv = document.getElementById('typing-indicator');
+                if (typingDiv) typingDiv.remove();
+            }
+
+            function handleUserMessage() {
+                const text = chatInput.value.trim();
+                if (!text) return;
+                appendMessage(text, true);
+                chatInput.value = '';
+                showTyping();
+                setTimeout(() => {
+                    removeTyping();
+                    appendMessage("Thank you for your message! To serve you better and provide precise details, we recommend choosing one of the menu options above, or contact our team directly via WhatsApp.", false);
+                    appendMessage("<a href='https://wa.me/916264936098' target='_blank' class='inline-block px-4 py-2 bg-emerald-500 text-white rounded-full font-bold shadow-md hover:bg-emerald-600 transition-colors text-xs'><i class='fab fa-whatsapp mr-1'></i>Chat on WhatsApp</a>", false);
+                }, 1000 + Math.random() * 500);
+            }
+
+            chatSendBtn.addEventListener('click', handleUserMessage);
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleUserMessage();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
